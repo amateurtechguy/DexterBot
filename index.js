@@ -23,7 +23,8 @@ app.command("/dexter-help", async ({ ack, respond }) => {
 `Available Commands:
     /dexter-ping - Check bot latency
     /dexter-catfact - Get a cat fact
-    /dexter-joke`
+    /dexter-joke - Get a joke from dexter
+    /dexter-fact - Get a useless fact`
   });
 });
 app.command("/dexter-catfact", async ({ ack, respond }) => {
@@ -46,5 +47,16 @@ ${response.data.punchline}`
     });
   } catch (err) {
     await respond({ text: "Failed to fetch a joke." });
+  }
+});
+app.command("/dexter-fact", async ({ ack, respond }) => {
+  await ack();
+  try {
+    const response = await axios.get("https://uselessfacts.jsph.pl/api/v2/facts/random");
+    await respond({
+      text: `🧠 *Random Fact*\n${response.data.text}`
+    });
+  } catch (err) {
+    await respond({ text: "Failed to fetch a random fact." });
   }
 });
