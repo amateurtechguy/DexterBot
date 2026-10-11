@@ -10,7 +10,7 @@ app.command("/dexter-ping", async ({ command, ack, respond }) => {
   const start = Date.now();
   await ack();
   const latency = Date.now() - start;
-  await respond({ text: `Pong!\nLatency: ${latency}ms` });
+  await respond({ text: `Pong, i suppose.\nLatency: ${latency}ms` });
 });
 (async () => {
   await app.start();
@@ -60,3 +60,9 @@ app.command("/dexter-fact", async ({ ack, respond }) => {
     await respond({ text: "Failed to fetch a random fact." });
   }
 });
+app.command("/dexter-", async ({ ack, respond }) => {
+    await ack();
+    try {
+        
+    }
+})
