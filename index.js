@@ -8,6 +8,12 @@ const app = new App({
     appToken: process.env.SLACK_APP_TOKEN,
     socketMode: true
 });
+app.command("/dexter-hello", async ({ command, ack, respond }) => {
+  await ack();
+  await respond({
+    response_type: "in_channel",
+    text: 'Hi.' });
+});
 app.command("/dexter-ping", async ({ command, ack, respond }) => {
   const start = Date.now();
   await ack();
@@ -30,7 +36,8 @@ app.command("/dexter-help", async ({ ack, respond }) => {
     /dexter-catfact - Get a cat fact
     /dexter-joke - Get a joke from dexter
     /dexter-fact - Get a useless fact
-    /dexter-ai - Talk to the dexter AI`
+    /dexter-ai - Talk to the dexter AI
+    /dexter-hello - Say Hi to dexter`
   });
 });
 app.command("/dexter-catfact", async ({ ack, respond }) => {
