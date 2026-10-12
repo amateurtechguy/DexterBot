@@ -36,7 +36,7 @@ app.command("/dexter-help", async ({ ack, respond }) => {
     /dexter-catfact - Get a cat fact
     /dexter-joke - Get a joke from dexter
     /dexter-fact - Get a useless fact
-    /dexter-ai - Talk to the dexter AI
+    /dexter-ai - Talk to the dexter AI (make sure to add your prompt after the command)
     /dexter-hello - Say Hi to dexter`
   });
 });
