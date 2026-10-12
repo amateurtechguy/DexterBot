@@ -1,3 +1,5 @@
+const { execFile } = require("child_process");
+const path = require("path");
 const axios = require("axios");
 require("dotenv").config();
 const { App } = require("@slack/bolt");
@@ -24,7 +26,8 @@ app.command("/dexter-help", async ({ ack, respond }) => {
     /dexter-ping - Check bot latency
     /dexter-catfact - Get a cat fact
     /dexter-joke - Get a joke from dexter
-    /dexter-fact - Get a useless fact`
+    /dexter-fact - Get a useless fact
+    /dexter-ai - Talk to the dexter AI`
   });
 });
 app.command("/dexter-catfact", async ({ ack, respond }) => {
@@ -54,15 +57,31 @@ app.command("/dexter-fact", async ({ ack, respond }) => {
   try {
     const response = await axios.get("https://uselessfacts.jsph.pl/api/v2/facts/random");
     await respond({
-      text: `🧠 *Random Fact*\n${response.data.text}`
+      text: `🧠 *Random killer Fact*\n${response.data.text}`
     });
   } catch (err) {
     await respond({ text: "Failed to fetch a random fact." });
   }
 });
-app.command("/dexter-", async ({ ack, respond }) => {
+app.command("/dexter-ai", async ({ command, ack, respond }) => {
     await ack();
-    try {
-        
+    if (!command.text.trim()){
+      await respond({ text: "Give me something to think about first."});
+      return;
     }
-})
+    execFile(
+      "python",
+      [path.join(__dirname, "ai.py"), command.text],
+      { timeout: 60000 },
+      async (error, stdout) => {
+        if (error) {
+          console.error(error);
+          await respond({ text: "Dexter's AI has encountered an error."});
+          return;
+        }
+        await respond({
+          text: stdout.trim() || "Dexter has nothing to say."
+        });
+     }
+  );
+});
