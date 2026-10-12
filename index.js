@@ -13,7 +13,7 @@ app.command("/dexter-ping", async ({ command, ack, respond }) => {
   await ack();
   const latency = Date.now() - start;
   await respond({ 
-     response_type: " in_channel",
+     response_type: "in_channel",
      text: `Pong, i suppose.\nLatency: ${latency}ms` });
 });
 (async () => {
