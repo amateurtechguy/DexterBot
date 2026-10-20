@@ -59,7 +59,7 @@ I learned a lot about what API's are and how they work, and most importantly I a
 -  /dexter-fact - Get a useless fact
 -  /dexter-ai - Talk to the dexter AI (make sure to add your prompt after the command)
 -  /dexter-hello - Say Hi to dexter
-
+-  [API](https://console.groq.com/keys)
   ---
   ## Creator:
    made by: the amateur tech guy!!
