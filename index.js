@@ -4,23 +4,25 @@ const axios = require("axios");
 require("dotenv").config();
 const { App } = require("@slack/bolt");
 const app = new App({
-    token: process.env.SLACK_BOT_TOKEN,
-    appToken: process.env.SLACK_APP_TOKEN,
-    socketMode: true
+  token: process.env.SLACK_BOT_TOKEN,
+  appToken: process.env.SLACK_APP_TOKEN,
+  socketMode: true,
 });
 app.command("/dexter-hello", async ({ command, ack, respond }) => {
   await ack();
   await respond({
     response_type: "in_channel",
-    text: 'Hi.' });
+    text: "Hi.",
+  });
 });
 app.command("/dexter-ping", async ({ command, ack, respond }) => {
   const start = Date.now();
   await ack();
   const latency = Date.now() - start;
-  await respond({ 
-     response_type: "in_channel",
-     text: `Pong, i suppose.\nLatency: ${latency}ms` });
+  await respond({
+    response_type: "in_channel",
+    text: `Pong, i suppose.\nLatency: ${latency}ms`,
+  });
 });
 (async () => {
   await app.start();
@@ -30,83 +32,92 @@ app.command("/dexter-help", async ({ ack, respond }) => {
   await ack();
   await respond({
     response_type: "in_channel",
-    text:
-`Available Commands:
+    text: `Available Commands:
     /dexter-ping - Check bot latency
     /dexter-catfact - Get a cat fact
     /dexter-joke - Get a joke from dexter
     /dexter-fact - Get a useless fact
     /dexter-ai - Talk to the dexter AI (make sure to add your prompt after the command)
-    /dexter-hello - Say Hi to dexter`
+    /dexter-hello - Say Hi to dexter`,
   });
 });
 app.command("/dexter-catfact", async ({ ack, respond }) => {
   await ack();
   try {
     const response = await axios.get("https://catfact.ninja/fact");
-    await respond({ 
+    await respond({
       response_type: "in_channel",
-      text: `Cat Fact:\n${response.data.fact}` });
+      text: `Cat Fact:\n${response.data.fact}`,
+    });
   } catch (err) {
-    await respond({ 
+    await respond({
       response_type: "in_channel",
-      text: "Failed to fetch a cat fact." });
+      text: "Failed to fetch a cat fact.",
+    });
   }
 });
 app.command("/dexter-joke", async ({ ack, respond }) => {
   await ack();
   try {
-    const response = await axios.get("https://official-joke-api.appspot.com/random_joke");
+    const response = await axios.get(
+      "https://official-joke-api.appspot.com/random_joke",
+    );
     await respond({
       response_type: "in_channel",
-      text:
-`${response.data.setup}
-${response.data.punchline}`
+      text: `${response.data.setup}
+${response.data.punchline}`,
     });
   } catch (err) {
-    await respond({ 
+    await respond({
       response_type: "in_channel",
-      text: "Failed to fetch a joke." });
+      text: "Failed to fetch a joke.",
+    });
   }
 });
 app.command("/dexter-fact", async ({ ack, respond }) => {
   await ack();
   try {
-    const response = await axios.get("https://uselessfacts.jsph.pl/api/v2/facts/random");
+    const response = await axios.get(
+      "https://uselessfacts.jsph.pl/api/v2/facts/random",
+    );
     await respond({
       response_type: "in_channel",
-      text: `🧠 *Random killer Fact*\n${response.data.text}`
+      text: `🧠 *Random killer Fact*\n${response.data.text}`,
     });
   } catch (err) {
-    await respond({ 
+    await respond({
       response_type: "in_channel",
-      text: "Failed to fetch a random fact." });
+      text: "Failed to fetch a random fact.",
+    });
   }
 });
 app.command("/dexter-ai", async ({ command, ack, respond }) => {
-    await ack();
-    if (!command.text.trim()){
-      await respond({ 
-        response_type: "in_channel",
-        text: "Give me something to think about first."});
-      return;
-    }
-    execFile(
-      "python",
-      [path.join(__dirname, "ai.py"), command.text],
-      { timeout: 60000 },
-      async (error, stdout) => {
-        if (error) {
-          console.error(error);
-          await respond({ 
-            response_type: "in_channel",
-            text: "Dexter's AI has encountered an error."});
-          return;
-        }
+  await ack();
+  if (!command.text.trim()) {
+    await respond({
+      response_type: "in_channel",
+      text: "Give me something to think about first.",
+    });
+    return;
+  }
+  execFile(
+    "python",
+    [path.join(__dirname, "ai.py"), command.text],
+    { timeout: 60000 },
+    async (error, stdout) => {
+      if (error) {
+        console.error(error);
+        console.error(stderr);
         await respond({
           response_type: "in_channel",
-          text: stdout.trim() || "Dexter has nothing to say."
+          text: "Dexter's AI has encountered an error.",
         });
-     }
+        return;
+      }
+      await respond({
+        response_type: "in_channel",
+        text: stdout.trim() || "Dexter has nothing to say.",
+      });
+    },
   );
 });
