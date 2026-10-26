@@ -1,7 +1,7 @@
 # DexterBot
 A fun live slack bot with many features, it's a very multifunctional bot with interactive commands for fun, try it out to dive deeper in a pool of blood.
 
-[Try talking to Dexter.](https://slack.com/oauth/v2/authorize?client_id=2210535565.12222891519894&scope=chat:write.public,app_mentions:read,assistant:write,channels:history,chat:write,commands,groups:history,im:history,im:read,im:write,reactions:read,reactions:write,users:read&user_scope=search:read,channels:history,channels:read,groups:history,groups:read,im:history,mpim:history,users:read,search:read.public,search:read.private,search:read.mpim,search:read.im,search:read.files,search:read.users,chat:write,canvases:read,canvases:write,users:read.email)
+[Try talking to Dexter.](https://hackclub.enterprise.slack.com/archives/C0CBTK6DPN1)
 
 <img width="384" height="82" alt="image" src="https://github.com/user-attachments/assets/9447a1e1-6208-4fbe-87fd-48137cd58dcc" />
 
@@ -37,7 +37,7 @@ npm install
 
 set environment variables (create a .env file):
 
-OPENAI_TOKEN_KEY=your_token
+GROQ_TOKEN_KEY=your_token
 
 SLACK_BOT_TOKEN=your_token
 
