@@ -61,6 +61,12 @@ I learned a lot about what API's are and how they work, and most importantly I a
 -  /dexter-hello - Say Hi to dexter
 -  [API](https://console.groq.com/keys)
 -  [Guide](https://stardance.hackclub.com/missions/slack-bot/guide)
+
+## AI usage declaration:
+
+- slight debugging
+- picking out an API
+
   ---
   ## Creator:
    made by: the amateur tech guy!!
