@@ -3,11 +3,13 @@ const path = require("path");
 const axios = require("axios");
 require("dotenv").config();
 const { App } = require("@slack/bolt");
+
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
   appToken: process.env.SLACK_APP_TOKEN,
   socketMode: true,
 });
+
 app.command("/dexter-hello", async ({ command, ack, respond }) => {
   await ack();
   await respond({
@@ -15,6 +17,7 @@ app.command("/dexter-hello", async ({ command, ack, respond }) => {
     text: "Hi.",
   });
 });
+
 app.command("/dexter-ping", async ({ command, ack, respond }) => {
   const start = Date.now();
   await ack();
@@ -24,10 +27,7 @@ app.command("/dexter-ping", async ({ command, ack, respond }) => {
     text: `Pong, i suppose.\nLatency: ${latency}ms`,
   });
 });
-(async () => {
-  await app.start();
-  console.log("bot is running!");
-})();
+
 app.command("/dexter-help", async ({ ack, respond }) => {
   await ack();
   await respond({
@@ -41,6 +41,7 @@ app.command("/dexter-help", async ({ ack, respond }) => {
     /dexter-hello - Say Hi to dexter`,
   });
 });
+
 app.command("/dexter-catfact", async ({ ack, respond }) => {
   await ack();
   try {
@@ -56,6 +57,7 @@ app.command("/dexter-catfact", async ({ ack, respond }) => {
     });
   }
 });
+
 app.command("/dexter-joke", async ({ ack, respond }) => {
   await ack();
   try {
@@ -64,8 +66,7 @@ app.command("/dexter-joke", async ({ ack, respond }) => {
     );
     await respond({
       response_type: "in_channel",
-      text: `${response.data.setup}
-${response.data.punchline}`,
+      text: `${response.data.setup}\n${response.data.punchline}`,
     });
   } catch (err) {
     await respond({
@@ -74,6 +75,7 @@ ${response.data.punchline}`,
     });
   }
 });
+
 app.command("/dexter-fact", async ({ ack, respond }) => {
   await ack();
   try {
@@ -91,6 +93,7 @@ app.command("/dexter-fact", async ({ ack, respond }) => {
     });
   }
 });
+
 app.command("/dexter-ai", async ({ command, ack, respond }) => {
   await ack();
   if (!command.text.trim()) {
@@ -103,10 +106,10 @@ app.command("/dexter-ai", async ({ command, ack, respond }) => {
   execFile(
     "python",
     [path.join(__dirname, "ai.py"), command.text],
-    { timeout: 60000 },
-    async (error, stdout) => {
+    { timeout: 60000, env: process.env },
+    async (error, stdout, stderr) => {
       if (error) {
-        console.error(error);
+        console.error(error.message);
         console.error(stderr);
         await respond({
           response_type: "in_channel",
@@ -121,3 +124,7 @@ app.command("/dexter-ai", async ({ command, ack, respond }) => {
     },
   );
 });
+(async () => {
+  await app.start();
+  console.log("bot is running!");
+})();

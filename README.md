@@ -1,10 +1,10 @@
 # DexterBot
+
 A fun live slack bot with many features, it's a very multifunctional bot with interactive commands for fun, try it out to dive deeper in a pool of blood.
 
 [Try talking to Dexter.](https://hackclub.enterprise.slack.com/archives/C0CBTK6DPN1)
 
 <img width="384" height="82" alt="image" src="https://github.com/user-attachments/assets/9447a1e1-6208-4fbe-87fd-48137cd58dcc" />
-
 
 ## What is this about?
 
@@ -17,6 +17,7 @@ to use it:
 go to slack and run commands starting with /
 it is recommended to message the bot directly.
 example usage:
+
 - /dexter-help
 - /dexter-ping
 - /dexter-ai how was your day?
@@ -25,7 +26,6 @@ Note: almost all commands require an input after the command, separated by a spa
 setup (optional):
 
 if you want to run your own version:
-
 
 clone the repository:
 
@@ -37,7 +37,7 @@ npm install
 
 set environment variables (create a .env file):
 
-GROQ_TOKEN_KEY=your_token
+GROQ_API_KEY=your_token
 
 SLACK_BOT_TOKEN=your_token
 
@@ -47,27 +47,28 @@ run the bot:
 
 node index.js
 
-## What I learned from this project: 
+## What I learned from this project:
 
 I learned a lot about what API's are and how they work, and most importantly I am starting to gain knowledge in python which I have been procrastinating for AGESSSS, and my second proudest part is the AI thing, it genuinely was so hard I have no experience with AIs but I feel very very impressed by my work because the hard work finally paid off!
 
 ## API and external tools:
 
--  /dexter-ping - Check bot latency
--  /dexter-catfact - Get a cat fact
--  /dexter-joke - Get a joke from dexter
--  /dexter-fact - Get a useless fact
--  /dexter-ai - Talk to the dexter AI (make sure to add your prompt after the command)
--  /dexter-hello - Say Hi to dexter
--  [API](https://console.groq.com/keys)
--  [Guide](https://stardance.hackclub.com/missions/slack-bot/guide)
+- /dexter-ping - Check bot latency
+- /dexter-catfact - Get a cat fact
+- /dexter-joke - Get a joke from dexter
+- /dexter-fact - Get a useless fact
+- /dexter-ai - Talk to the dexter AI (make sure to add your prompt after the command)
+- /dexter-hello - Say Hi to dexter
+- [API](https://console.groq.com/keys)
+- [Guide](https://stardance.hackclub.com/missions/slack-bot/guide)
 
 ## AI usage declaration:
 
 - slight debugging
 - picking out an API
 
-  ---
+  ***
+
   ## Creator:
-   made by: the amateur tech guy!!
-  
+
+  made by: the amateur tech guy!!
