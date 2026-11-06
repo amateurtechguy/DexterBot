@@ -37,7 +37,7 @@ npm install
 
 set environment variables (create a .env file):
 
-GROQ_TOKEN_KEY=your_token
+GROQ_API_KEY=your_token
 
 SLACK_BOT_TOKEN=your_token
 
