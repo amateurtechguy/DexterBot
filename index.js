@@ -53,7 +53,7 @@ app.command("/dexter-catfact", async ({ ack, respond }) => {
   } catch (err) {
     await respond({
       response_type: "in_channel",
-      text: "Failed to fetch a cat fact.",
+      text: "Unable to fetch you a cat fact.",
     });
   }
 });
@@ -71,7 +71,7 @@ app.command("/dexter-joke", async ({ ack, respond }) => {
   } catch (err) {
     await respond({
       response_type: "in_channel",
-      text: "Failed to fetch a joke.",
+      text: "Unable to fetch you a joke.",
     });
   }
 });
