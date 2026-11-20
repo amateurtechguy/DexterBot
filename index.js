@@ -62,7 +62,7 @@ app.command("/dexter-joke", async ({ ack, respond }) => {
   await ack();
   try {
     const response = await axios.get(
-      "https://official-joke-api.appspot.com/random_joke",
+      "https://v2.jokeapi.dev/joke/Any?type=twopart&safe-mode",
     );
     await respond({
       response_type: "in_channel",
