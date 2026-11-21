@@ -66,9 +66,10 @@ app.command("/dexter-joke", async ({ ack, respond }) => {
     );
     await respond({
       response_type: "in_channel",
-      text: `${response.data.setup}\n${response.data.punchline}`,
+      text: `${response.data.setup}\n${response.data.delivery}`,
     });
   } catch (err) {
+    console.error(err);
     await respond({
       response_type: "in_channel",
       text: "Unable to fetch you a joke.",
