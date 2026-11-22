@@ -105,7 +105,7 @@ app.command("/dexter-ai", async ({ command, ack, respond }) => {
     return;
   }
   execFile(
-    "python",
+    "python3",
     [path.join(__dirname, "ai.py"), command.text],
     { timeout: 60000, env: process.env },
     async (error, stdout, stderr) => {
