@@ -110,11 +110,12 @@ app.command("/dexter-ai", async ({ command, ack, respond }) => {
     { timeout: 60000, env: process.env },
     async (error, stdout, stderr) => {
       if (error) {
-        console.error(error.message);
-        console.error(stderr);
+        console.error("DEXTER AI ERROR:", error);
+        console.error("PYTHON STDERR:", stderr);
+        console.error("PYTHON STDOUT:", stdout);
         await respond({
           response_type: "in_channel",
-          text: "Dexter's AI has encountered an error.",
+          text: "Dexter's AI has encountered an error. Check the server logs.",
         });
         return;
       }
